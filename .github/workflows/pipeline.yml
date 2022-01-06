@@ -35,8 +35,6 @@ jobs:
         # what to install.
         outputs:
             publishversion: ${{ steps.version.outputs.publishversion }}
-You can see here that the build job is using two of the ServiceNow GitHub actions and also referencing the secrets that that you’ll setup. It first does an apply changes where it pulls down the latest changes to the feature branch, and then it publishes the feature branch version of the app to the internal app repo.
-
     test:
         # Purpose of this job is to Install App from the app repo for the version 
         # published in the build job to a Test instance, then run an ATF Test Suite 
@@ -88,7 +86,6 @@ You can see here that the build job is using two of the ServiceNow GitHub action
     # what to install.
     outputs:
         publishversion: ${{ steps.version.outputs.publishversion }}
-In the test job the first action is installing the app from the app repo into the test instance and then it’s running the ATF test suite specified in the secrets section. The third step is a Rollback App action, and will rollback the app install in the test instance if the ATF action failed.
 
     deployprod:
         # Purpose of this job is to Install App to a Prod instance. This should only 
