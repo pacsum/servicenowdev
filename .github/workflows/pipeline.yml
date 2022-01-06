@@ -61,14 +61,15 @@ You can see here that the build job is using two of the ServiceNow GitHub action
                 snowInstallInstance: ${{ secrets.SN_TEST_INSTANCE }}
                 appSysID: ${{ secrets.SN_APP_SYSID }}
 
-        - name: ServiceNow CI/CD Run ATF Test Suite
-            uses: ServiceNow/sncicd-tests-run@1.0.0
-            with:
-                testSuiteSysId: ${{ secrets.SN_ATFTESTSUITE_SYSID }}
-            env:
-                snowUsername: ${{ secrets.SN_USERNAME }}
-                snowPassword: ${{ secrets.SN_PASSWORD }}
-                snowInstallInstance: ${{ secrets.SN_TEST_INSTANCE }}
+        #  do not trigger ATF only deploy to TEST
+        # - name: ServiceNow CI/CD Run ATF Test Suite
+        #    uses: ServiceNow/sncicd-tests-run@1.0.0
+        #    with:
+        #        testSuiteSysId: ${{ secrets.SN_ATFTESTSUITE_SYSID }}
+        #  env:
+        #        snowUsername: ${{ secrets.SN_USERNAME }}
+        #        snowPassword: ${{ secrets.SN_PASSWORD }}
+        #        snowInstallInstance: ${{ secrets.SN_TEST_INSTANCE }}
 
         - name: ServiceNow CI/CD Rollback App
             if: ${{ failure() && steps.install_app.outputs.rollbackVersion }}
